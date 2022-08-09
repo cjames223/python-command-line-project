@@ -7,12 +7,12 @@ db.connect()
 
 class BaseModel(Model):
     class Meta:
-        database =db
+        database = db
 
 class Contact(BaseModel):
     first_name = CharField()
     last_name = CharField()
-    phone_number = IntegerField()
+    phone_number = BigIntegerField()
 
 # db.drop_tables([Contact])
 db.create_tables([Contact])
@@ -20,7 +20,7 @@ db.create_tables([Contact])
 
 
 def create_contact():
-    first_name = input('Create A Contact \n First Name: ')
+    first_name = input('Create A Contact \nFirst Name: ')
     last_name = input('Last Name: ')
     phone_number = input('Phone Number: ')
 
@@ -38,7 +38,10 @@ input('Welcome to Contact Book!')
 def contact_book():
     
     user = input('What would you like to do? ')
-    if user == 'New Contact':
+    if user != 'New Contact' and user != 'See Contacts' and user != 'Find Contact' and user != 'exit':
+        print('Invalid Input!')
+        contact_book()
+    elif user == 'New Contact':
         create_contact()
         contact_book()
     elif user == 'See Contacts':
